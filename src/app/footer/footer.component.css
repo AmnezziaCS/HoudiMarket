@@ -1,0 +1,40 @@
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 30px 10px 20px 10px;
+}
+
+.footer h3 {
+    color: #fff;
+}
+
+.footer ul {
+    padding: 0;
+    list-style: none;
+}
+
+.footer ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+.footer ul li a {
+    color: #fff;
+}
+
+.footer ul li a:hover {
+    color: #ccc;
+}
+
+.footer form {
+    margin-top: 20px;
+}
+
+.footer form .form-group {
+    display: flex;
+}
+
+.footer form .form-group input {
+    flex: 1;
+    margin-right: 10px;
+}
