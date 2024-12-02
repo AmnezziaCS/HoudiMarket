@@ -8,3 +8,41 @@ mat-card {
     width: 20%;
     display: inline-block;
 }
+
+.onStock {
+    background-color: green;
+    color: white;
+}
+
+.outOfStock {
+    background-color: red;
+    color: white;
+}
+
+.message-Onstock {
+    position: fixed;
+    z-index: 100;
+    top: 10px;
+    left: 40%;
+    font-size: 22px;
+    color: white;
+    background-color: green;
+    font-weight: bold;
+    border: gray solid;
+    border-radius: 4px;
+    padding: 15px;
+}
+
+.message-outOfStock {
+    position: fixed;
+    z-index: 100;
+    top: 10px;
+    left: 40%;
+    font-size: 22px;
+    color: white;
+    background-color: red;
+    font-weight: bold;
+    border: gray solid;
+    border-radius: 4px;
+    padding: 15px;
+}

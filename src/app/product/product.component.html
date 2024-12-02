@@ -1,3 +1,12 @@
+<div *ngIf="onStockMessage" class="message-Onstock">
+    {{product.title}} ajouté au panier.
+</div>
+
+<div *ngIf="outOfStock" class="message-outOfStock">
+    {{product.title}} est hors stock.
+</div>
+
+
 <mat-card>
     <mat-card-header>
         <mat-card-title>{{ product.title }}</mat-card-title>
@@ -8,6 +17,7 @@
         <p>{{ product.description }}</p>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-button color="primary">Buy</button>
+        <button [ngClass]="{'onStock': onStockMessage, 'outOfStock': outOfStock}" (click)="toggleButtonClick()"
+            mat-button color="primary">Buy</button>
     </mat-card-actions>
 </mat-card>
