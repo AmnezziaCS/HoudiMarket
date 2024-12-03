@@ -10,7 +10,7 @@
     <mat-card>
         <mat-card-header>
             <mat-card-title>{{ product.title }}</mat-card-title>
-            <mat-card-subtitle>${{ product.price }}</mat-card-subtitle>
+            <mat-card-subtitle>{{ product.price | price }}</mat-card-subtitle>
             <mat-card-subtitle>Stock: {{ product.stock }}</mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image [src]="product.photo" alt="Product photo" />

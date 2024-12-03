@@ -3,11 +3,12 @@ import { Product } from './product.types';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { ProductService } from './product.service';
+import { PricePipe } from '../../pipes/price.pipe';
 
 @Component({
   selector: 'app-product',
   standalone: true,
-  imports: [MatCardModule, CommonModule],
+  imports: [MatCardModule, CommonModule, PricePipe],
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
