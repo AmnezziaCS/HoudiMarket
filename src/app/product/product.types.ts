@@ -1,9 +1,11 @@
 export interface Product {
-    id: number;
     title: string;
-    description: string;
-    photo: string;
     price: number;
+    description: string;
+    id: number;
     stock: number;
+    photo: string;
     category: string;
+    onStockMessage?: boolean;
+    outOfStock?: boolean;
 }

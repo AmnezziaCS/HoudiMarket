@@ -5,35 +5,25 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-product',
+  standalone: true,
   imports: [MatCardModule, CommonModule],
   templateUrl: './product.component.html',
-  styleUrl: './product.component.css'
+  styleUrls: ['./product.component.css']
 })
 export class ProductComponent {
-  @Input({ required: true }) product!: Product
+  @Input({ required: true }) products!: Product[];
 
-
-  onStockMessage = false;
-  outOfStock = false;
-
-  toggleButtonClick() {
-    if (this.product.stock > 0) {
-
-      console.log(this.product.title + "ajouté au panier");
-      this.onStockMessage = !this.onStockMessage;
-      this.product.stock -= 1;
+  toggleButtonClick(product: Product) {
+    if (product.stock > 0) {
+      console.log(product.title + " ajouté au panier");
+      product.onStockMessage = true;
+      product.stock -= 1;
 
       setTimeout(() => {
-        this.onStockMessage = !this.onStockMessage;
+        product.onStockMessage = false;
       }, 2000);
     } else {
-      this.outOfStock = true;
-      setTimeout(() => {
-        this.outOfStock = false;
-
-      }, 2000);
+      product.outOfStock = true;
     }
   }
-
-
 }

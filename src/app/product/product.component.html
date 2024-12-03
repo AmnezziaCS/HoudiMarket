@@ -1,23 +1,25 @@
-<div *ngIf="onStockMessage" class="message-Onstock">
-    {{product.title}} ajouté au panier.
-</div>
+<ng-container *ngFor="let product of products">
+    <div *ngIf="product.onStockMessage" class="message-Onstock">
+        {{product.title}} ajouté au panier.
+    </div>
 
-<div *ngIf="outOfStock" class="message-outOfStock">
-    {{product.title}} est hors stock.
-</div>
+    <div *ngIf="product.outOfStock" class="message-outOfStock">
+        {{product.title}} est hors stock.
+    </div>
 
-
-<mat-card>
-    <mat-card-header>
-        <mat-card-title>{{ product.title }}</mat-card-title>
-        <mat-card-subtitle>${{ product.price }}</mat-card-subtitle>
-    </mat-card-header>
-    <img mat-card-image [src]="product.photo" alt="Product photo" />
-    <mat-card-content>
-        <p>{{ product.description }}</p>
-    </mat-card-content>
-    <mat-card-actions>
-        <button [ngClass]="{'onStock': onStockMessage, 'outOfStock': outOfStock}" (click)="toggleButtonClick()"
-            mat-button color="primary">Buy</button>
-    </mat-card-actions>
-</mat-card>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{ product.title }}</mat-card-title>
+            <mat-card-subtitle>${{ product.price }}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="product.photo" alt="Product photo" />
+        <mat-card-content>
+            <p>{{ product.description }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button [ngClass]="{'onStock': product.onStockMessage, 'outOfStock': product.outOfStock}"
+                (click)="toggleButtonClick(product)" [disabled]="product.stock === 0" mat-button
+                color="primary">Buy</button>
+        </mat-card-actions>
+    </mat-card>
+</ng-container>
