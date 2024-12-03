@@ -1,5 +1,13 @@
 <div class="main">
-    <app-header (categorySelected)="onCategorySelected($event)"></app-header>
+    <app-header></app-header>
+
+    <div class="category-buttons">
+        <button mat-button (click)="onCategorySelected('all')">All</button>
+        <button mat-button (click)="onCategorySelected('riffles')">Riffles</button>
+        <button mat-button (click)="onCategorySelected('knives')">Knives</button>
+        <button mat-button (click)="onCategorySelected('snipers')">Snipers</button>
+        <button mat-button (click)="onCategorySelected('pistols')">Pistols</button>
+    </div>
 
     <app-product class="products" [selectedCategory]="selectedCategory"></app-product>
 

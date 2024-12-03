@@ -20,7 +20,6 @@ describe('ProductComponent', () => {
         product = {
             title: 'Test Product',
             price: 100,
-            description: 'This is a test product',
             id: 1,
             stock: 10,
             photo: 'https://via.placeholder.com/150',

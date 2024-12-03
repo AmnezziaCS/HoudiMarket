@@ -14,9 +14,6 @@
             <mat-card-subtitle>Stock: {{ product.stock }}</mat-card-subtitle>
         </mat-card-header>
         <img mat-card-image [src]="product.photo" alt="Product photo" />
-        <mat-card-content>
-            <p>{{ product.description }}</p>
-        </mat-card-content>
         <mat-card-actions>
             <button [ngClass]="{'onStock': product.onStockMessage, 'outOfStock': product.outOfStock}"
                 (click)="toggleButtonClick(product)" [disabled]="product.stock === 0" mat-button
