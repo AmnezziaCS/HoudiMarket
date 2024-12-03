@@ -2,6 +2,7 @@ import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/cor
 import { Product } from './product.types';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
+import { ProductService } from './product.service';
 
 @Component({
   selector: 'app-product',
@@ -11,17 +12,20 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit, OnChanges {
-  @Input({ required: true }) products!: Product[];
   @Input() selectedCategory: string = 'all';
+  products: Product[] = [];
   filteredProducts: Product[] = [];
 
+  constructor(private productService: ProductService) {}
+
   ngOnInit() {
+    this.products = this.productService.getAllProducts();
     this.filteredProducts = this.products;
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['selectedCategory']) {
-      this.filterByCategory(changes['selectedCategory'].currentValue);
+      this.filterByCategory(this.selectedCategory);
     }
   }
 
@@ -29,7 +33,7 @@ export class ProductComponent implements OnInit, OnChanges {
     if (category === 'all') {
       this.filteredProducts = this.products;
     } else {
-      this.filteredProducts = this.products.filter(product => product.category === category);
+      this.filteredProducts = this.productService.getProductByCategoryId(category);
     }
   }
 
