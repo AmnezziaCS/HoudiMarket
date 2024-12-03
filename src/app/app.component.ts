@@ -57,6 +57,17 @@ export class AppComponent {
       category: 'knives',
       onStockMessage: false,
       outOfStock: false
+    },
+    {
+      title: 'AK-47 | Gold arabesque',
+      price: 800,
+      description: 'The Gold Arabesque is a Counter Strike: Global Offensive skin for the AK-47 rifle. It is one of the most expensive skins in the game, and is highly sought after by collectors.',
+      id: 5,
+      photo: 'https://community.fastly.steamstatic.com/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpot7HxfDhnwMzJemkV09u5mIS0luX1Mb7Ch35U18h0juDU-MKjiQTnqEJpZm2lLIXHJwU8YQvX_Vjswuro1p64u5qayCZquyQl7HjdgVXp1puqHVel',
+      stock: 4,
+      category: 'riffles',
+      onStockMessage: false,
+      outOfStock: false
     }
   ];
 

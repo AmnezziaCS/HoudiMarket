@@ -1,7 +1,7 @@
 <div class="main">
     <app-header (categorySelected)="onCategorySelected($event)"></app-header>
 
-    <app-product [products]="fakeProducts" [selectedCategory]="selectedCategory"></app-product>
+    <app-product class="products" [products]="fakeProducts" [selectedCategory]="selectedCategory"></app-product>
 
     <app-footer class="footer"></app-footer>
 </div>
