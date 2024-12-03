@@ -12,6 +12,7 @@ import { Product } from './product/product.types';
 })
 export class AppComponent {
   title = 'HoudiMarket';
+  selectedCategory = 'all';
   fakeProducts: Product[] = [
     {
       title: 'M4A4 | Howl',
@@ -58,4 +59,8 @@ export class AppComponent {
       outOfStock: false
     }
   ];
+
+  onCategorySelected(category: string) {
+    this.selectedCategory = category;
+  }
 }

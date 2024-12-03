@@ -1,4 +1,4 @@
-<ng-container *ngFor="let product of products">
+<ng-container *ngFor="let product of filteredProducts">
     <div *ngIf="product.onStockMessage" class="message-Onstock">
         {{product.title}} ajouté au panier.
     </div>
