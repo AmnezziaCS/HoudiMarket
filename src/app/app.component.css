@@ -39,9 +39,20 @@
         transform 0.3s;
 }
 
+.category-buttons button.selected {
+    background-color: gray;
+    color: white;
+    border-color: gray;
+}
+
 .category-buttons button:hover {
     background-color: #f0f0f0;
     transform: scale(1.05);
+}
+
+.category-buttons button.selected:hover {
+    background-color: gray;
+    transform: scale(1);
 }
 
 .category-buttons button:active {

@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProductComponent } from './product/product.component';
-import { Product } from './product/product.types';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +13,11 @@ export class AppComponent {
   title = 'HoudiMarket';
   selectedCategory = 'all';
 
-  onCategorySelected(category: string) {
-    this.selectedCategory = category;
+  onCategorySelected(category: string): void {
+    if (this.selectedCategory === category) {
+      this.selectedCategory = 'all';
+    } else {
+      this.selectedCategory = category;
+    }
   }
 }
