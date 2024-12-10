@@ -38,3 +38,11 @@
     flex: 1;
     margin-right: 10px;
 }
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}

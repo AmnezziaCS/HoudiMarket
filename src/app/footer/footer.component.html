@@ -7,10 +7,6 @@
                     <img src="https://cdn4.iconfinder.com/data/icons/miu-hexagon-flat-social/60/stackoverflow-hexagon-social-media-32.png"
                         alt="" matTooltip="StackOverflow" matTooltipPosition="above" />
                 </a>
-                <a [href]="twitterUrl" target="_blank">
-                    <img src="https://cdn4.iconfinder.com/data/icons/miu-hexagon-flat-social/60/twitter-hexagon-social-media-32.png"
-                        alt="" matTooltip="Twitter" matTooltipPosition="above" />
-                </a>
                 <a [href]="facebookUrl" target="_blank">
                     <img src="https://cdn3.iconfinder.com/data/icons/free-social-icons/67/Untitled-16-32.png" alt=""
                         matTooltip="Facebook" matTooltipPosition="above" />
@@ -34,12 +30,11 @@
             </div>
             <div class="col-md-4">
                 <h3>Subscribe to our newsletter</h3>
-                <form>
-                    <div class="form-group"></div>
-                    <input type="email" class="form-control" placeholder="Enter your email" />
-                    <button type="submit" class="btn btn-primary">
-                        Subscribe
-                    </button>
+                <form (ngSubmit)="onSubmit(newsletterForm)" #newsletterForm="ngForm">
+                    <input type="email" name="email" ngModel required placeholder="Enter your email">
+                    <button type="submit">Subscribe</button>
+                    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+                    <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
                 </form>
             </div>
         </div>
