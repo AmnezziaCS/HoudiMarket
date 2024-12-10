@@ -1,4 +1,4 @@
-<div *ngIf="product">
+<div *ngIf="product" class="product">
     <h1>{{ product.title }}</h1>
     <img [src]="product.photo" alt="{{ product.title }}" />
     <p>Price: {{ product.price | price }}</p>
