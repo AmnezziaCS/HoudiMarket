@@ -18,7 +18,6 @@ export class ProductComponent implements OnInit {
   products = signal<Product[]>([]);
   filteredProducts: Product[] = [];
   showOnStockMessage: boolean = false;
-  showOutOfStockMessage: boolean = false;
 
   constructor(private productService: ProductService, private router: Router) { }
 
@@ -41,21 +40,19 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  toggleButtonClick(product: Product) {
+  toggleButtonClick(product: Product, event: Event) {
+    event.stopPropagation();
     if (product.stock > 0) {
-      product.stock -= 1;
-      this.showOnStockMessage = true;
-      this.showOutOfStockMessage = false;
+        product.stock -= 1;
+        this.showOnStockMessage = true;
     } else {
-      this.showOnStockMessage = false;
-      this.showOutOfStockMessage = true
+        this.showOnStockMessage = false;
     }
 
     setTimeout(() => {
-      this.showOnStockMessage = false;
-      this.showOutOfStockMessage = false;
+        this.showOnStockMessage = false;
     }, 2000);
-  }
+}
 
   viewProductDetails(productId: number) {
     this.router.navigate(['/product', productId]);
