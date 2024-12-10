@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, signal } from '@angular/core';
 import { Product } from './product.types';
 import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
@@ -14,17 +14,17 @@ import { PricePipe } from '../../pipes/price.pipe';
 })
 export class ProductComponent implements OnInit, OnChanges {
   @Input() selectedCategory: string = 'all';
-  products: Product[] = [];
-  filteredProducts: Product[] = [];
-  showOnStockMessage: boolean = false;
-  showOutOfStockMessage: boolean = false;
+  products = signal<Product[]>([]);
+  filteredProducts = signal<Product[]>([]);
+  showOnStockMessage = signal<boolean>(false);
+  showOutOfStockMessage = signal<boolean>(false);
 
   constructor(private productService: ProductService) {}
 
   ngOnInit() {
     this.productService.getAllProducts().subscribe(products => {
-      this.products = products.data;
-      this.filteredProducts = products.data;
+      this.products.set(products.data);
+      this.filteredProducts.set(products.data);
     });
   }
 
@@ -37,11 +37,11 @@ export class ProductComponent implements OnInit, OnChanges {
   filterByCategory(category: string) {
     if (category === 'all') {
       this.productService.getAllProducts().subscribe(products => {
-        this.filteredProducts = products.data;
+        this.filteredProducts.set(products.data);
       });
     } else {
       this.productService.getProductByCategoryId(category).subscribe(products => {
-        this.filteredProducts = products.data;
+        this.filteredProducts.set(products.data);
       });
     }
   }
@@ -49,16 +49,16 @@ export class ProductComponent implements OnInit, OnChanges {
   toggleButtonClick(product: Product) {
     if (product.stock > 0) {
       product.stock -= 1;
-      this.showOnStockMessage = true;
-      this.showOutOfStockMessage = false;
+      this.showOnStockMessage.set(true);
+      this.showOutOfStockMessage.set(false);
     } else {
-      this.showOutOfStockMessage = true;
-      this.showOnStockMessage = false;
+      this.showOutOfStockMessage.set(true);
+      this.showOnStockMessage.set(false);
     }
 
     setTimeout(() => {
-      this.showOnStockMessage = false;
-      this.showOutOfStockMessage = false;
+      this.showOnStockMessage.set(false);
+      this.showOutOfStockMessage.set(false);
     }, 2000);
   }
 }
