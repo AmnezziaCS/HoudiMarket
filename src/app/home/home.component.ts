@@ -13,12 +13,4 @@ import { RouterOutlet } from '@angular/router';
 })
 export class HomeComponent {
   selectedCategory = 'all';
-
-  onCategorySelected(category: string): void {
-    if (this.selectedCategory === category) {
-      this.selectedCategory = 'all';
-    } else {
-      this.selectedCategory = category;
-    }
-  }
 }

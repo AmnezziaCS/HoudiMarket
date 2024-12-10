@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-export class ProductComponent implements OnInit, OnChanges {
+export class ProductComponent implements OnInit {
   @Input() selectedCategory: string = 'all';
   products = signal<Product[]>([]);
   filteredProducts: Product[] = [];
@@ -28,20 +28,15 @@ export class ProductComponent implements OnInit, OnChanges {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['selectedCategory']) {
-      this.filterByCategory(this.selectedCategory);
-    }
-  }
-
-  filterByCategory(category: string) {
+  onCategorySelected(category: string) {
+    this.selectedCategory = category;
     if (category === 'all') {
       this.productService.getAllProducts().subscribe(products => {
         this.filteredProducts = products.data;
       });
     } else {
       this.productService.getProductByCategoryId(category).subscribe(products => {
-        this.filteredProducts = products.data;
+        this.filteredProducts = products.products;
       });
     }
   }

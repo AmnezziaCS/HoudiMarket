@@ -7,7 +7,7 @@ import { Product } from './product.types';
   providedIn: 'root'
 })
 export class ProductService {
-  apiUrl = "https://enigma-houdimarket-server-68399bf2f7b5.herokuapp.com/api/v1"
+  apiUrl = "https://enigma-houdimarket-server-68399bf2f7b5.herokuapp.com/api/v1";
 
   constructor(private http: HttpClient) {}
   
@@ -15,8 +15,8 @@ export class ProductService {
     return this.http.get<{data: Product[]}>(`${this.apiUrl}/products`);
   }
 
-  getProductByCategoryId(categoryId: string): Observable<{data: Product[]}> {
-    return this.http.get<{data: Product[]}>(`${this.apiUrl}/categories/${categoryId}`);
+  getProductByCategoryId(categoryId: string): Observable<{products: Product[]}> {
+    return this.http.get<{products: Product[]}>(`${this.apiUrl}/categories/${categoryId}`);
   }
 
   getProductById(productId: string): Observable<Product> {

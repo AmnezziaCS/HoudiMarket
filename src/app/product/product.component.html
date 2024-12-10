@@ -1,3 +1,15 @@
+<div class="category-buttons">
+    <button mat-button (click)="onCategorySelected('all')" [class.selected]="selectedCategory === 'all'">All</button>
+    <button mat-button (click)="onCategorySelected('67584836aaabf2ae8ca108bc')"
+        [class.selected]="selectedCategory === 'riffles'">Riffles</button>
+    <button mat-button (click)="onCategorySelected('67584836aaabf2ae8ca108bf')"
+        [class.selected]="selectedCategory === 'knives'">Knives</button>
+    <button mat-button (click)="onCategorySelected('67584836aaabf2ae8ca108c2')"
+        [class.selected]="selectedCategory === 'snipers'">Snipers</button>
+    <button mat-button (click)="onCategorySelected('67584836aaabf2ae8ca108c5')"
+        [class.selected]="selectedCategory === 'pistols'">Pistols</button>
+</div>
+
 <div class="products">
     <ng-container *ngFor="let product of filteredProducts">
         <mat-card (click)="viewProductDetails(product.id)">
