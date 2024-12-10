@@ -1,0 +1,15 @@
+h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1em;
+}
+
+p {
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+}

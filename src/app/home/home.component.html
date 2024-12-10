@@ -1,0 +1,20 @@
+<div class="main">
+    <app-header></app-header>
+
+    <div class="category-buttons">
+        <button mat-button (click)="onCategorySelected('all')"
+            [class.selected]="selectedCategory === 'all'">All</button>
+        <button mat-button (click)="onCategorySelected('riffles')"
+            [class.selected]="selectedCategory === 'riffles'">Riffles</button>
+        <button mat-button (click)="onCategorySelected('knives')"
+            [class.selected]="selectedCategory === 'knives'">Knives</button>
+        <button mat-button (click)="onCategorySelected('snipers')"
+            [class.selected]="selectedCategory === 'snipers'">Snipers</button>
+        <button mat-button (click)="onCategorySelected('pistols')"
+            [class.selected]="selectedCategory === 'pistols'">Pistols</button>
+    </div>
+
+    <router-outlet></router-outlet>
+
+    <app-footer class="footer"></app-footer>
+</div>

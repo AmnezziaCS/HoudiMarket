@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { ProductService } from './product.service';
 import { PricePipe } from '../../pipes/price.pipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -15,16 +16,15 @@ import { PricePipe } from '../../pipes/price.pipe';
 export class ProductComponent implements OnInit, OnChanges {
   @Input() selectedCategory: string = 'all';
   products = signal<Product[]>([]);
-  filteredProducts = signal<Product[]>([]);
-  showOnStockMessage = signal<boolean>(false);
-  showOutOfStockMessage = signal<boolean>(false);
+  filteredProducts: Product[] = [];
+  showOnStockMessage: boolean = false;
+  showOutOfStockMessage: boolean = false;
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit() {
-    this.productService.getAllProducts().subscribe(products => {
-      this.products.set(products.data);
-      this.filteredProducts.set(products.data);
+    this.productService.getAllProducts().subscribe(response => {
+      this.filteredProducts = response.data;
     });
   }
 
@@ -37,11 +37,11 @@ export class ProductComponent implements OnInit, OnChanges {
   filterByCategory(category: string) {
     if (category === 'all') {
       this.productService.getAllProducts().subscribe(products => {
-        this.filteredProducts.set(products.data);
+        this.filteredProducts = products.data;
       });
     } else {
       this.productService.getProductByCategoryId(category).subscribe(products => {
-        this.filteredProducts.set(products.data);
+        this.filteredProducts = products.data;
       });
     }
   }
@@ -49,16 +49,20 @@ export class ProductComponent implements OnInit, OnChanges {
   toggleButtonClick(product: Product) {
     if (product.stock > 0) {
       product.stock -= 1;
-      this.showOnStockMessage.set(true);
-      this.showOutOfStockMessage.set(false);
+      this.showOnStockMessage = true;
+      this.showOutOfStockMessage = false;
     } else {
-      this.showOutOfStockMessage.set(true);
-      this.showOnStockMessage.set(false);
+      this.showOnStockMessage = false;
+      this.showOutOfStockMessage = true
     }
 
     setTimeout(() => {
-      this.showOnStockMessage.set(false);
-      this.showOutOfStockMessage.set(false);
+      this.showOnStockMessage = false;
+      this.showOutOfStockMessage = false;
     }, 2000);
+  }
+
+  viewProductDetails(productId: number) {
+    this.router.navigate(['/product', productId]);
   }
 }
