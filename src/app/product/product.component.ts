@@ -16,12 +16,16 @@ export class ProductComponent implements OnInit, OnChanges {
   @Input() selectedCategory: string = 'all';
   products: Product[] = [];
   filteredProducts: Product[] = [];
+  showOnStockMessage: boolean = false;
+  showOutOfStockMessage: boolean = false;
 
   constructor(private productService: ProductService) {}
 
   ngOnInit() {
-    this.products = this.productService.getAllProducts();
-    this.filteredProducts = this.products;
+    this.productService.getAllProducts().subscribe(products => {
+      this.products = products.data;
+      this.filteredProducts = products.data;
+    });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -32,26 +36,29 @@ export class ProductComponent implements OnInit, OnChanges {
 
   filterByCategory(category: string) {
     if (category === 'all') {
-      this.filteredProducts = this.products;
+      this.productService.getAllProducts().subscribe(products => {
+        this.filteredProducts = products.data;
+      });
     } else {
-      this.filteredProducts = this.productService.getProductByCategoryId(category);
+      this.productService.getProductByCategoryId(category).subscribe(products => {
+        this.filteredProducts = products.data;
+      });
     }
   }
 
   toggleButtonClick(product: Product) {
     if (product.stock > 0) {
-      console.log(product.title + " ajouté au panier");
-      product.onStockMessage = true;
       product.stock -= 1;
-
-      setTimeout(() => {
-        product.onStockMessage = false;
-      }, 2000);
+      this.showOnStockMessage = true;
+      this.showOutOfStockMessage = false;
     } else {
-      product.outOfStock = true;
-      setTimeout(() => {
-        product.outOfStock = false;
-      }, 2000);
+      this.showOutOfStockMessage = true;
+      this.showOnStockMessage = false;
     }
+
+    setTimeout(() => {
+      this.showOnStockMessage = false;
+      this.showOutOfStockMessage = false;
+    }, 2000);
   }
 }

@@ -5,6 +5,6 @@ export interface Product {
     stock: number;
     photo: string;
     category: string;
-    onStockMessage?: boolean;
-    outOfStock?: boolean;
+    createdAt: string;
+    updatedAt: string;
 }

@@ -1,11 +1,6 @@
 <ng-container *ngFor="let product of filteredProducts">
-    <div *ngIf="product.onStockMessage" class="message-Onstock">
-        {{product.title}} ajouté au panier.
-    </div>
-
-    <div *ngIf="product.outOfStock" class="message-outOfStock">
-        {{product.title}} est hors stock.
-    </div>
+    <div *ngIf="showOnStockMessage && product.stock > 0" class="message-Onstock">Product is on stock</div>
+    <div *ngIf="showOutOfStockMessage && product.stock === 0" class="message-outOfStock">Product is out of stock</div>
 
     <mat-card>
         <mat-card-header>
@@ -15,7 +10,7 @@
         </mat-card-header>
         <img mat-card-image [src]="product.photo" alt="Product photo" />
         <mat-card-actions>
-            <button [ngClass]="{'onStock': product.onStockMessage, 'outOfStock': product.outOfStock}"
+            <button [ngClass]="{'onStock': product.stock > 0, 'outOfStock': product.stock === 0}"
                 (click)="toggleButtonClick(product)" [disabled]="product.stock === 0" mat-button
                 color="primary">Buy</button>
         </mat-card-actions>
