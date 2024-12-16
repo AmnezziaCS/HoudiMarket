@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
 import { PricePipe } from '../../pipes/price.pipe';
 import { Product } from '../product/product.types';
 import { CartService } from './cart.service';
@@ -8,7 +9,7 @@ import { CartService } from './cart.service';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  imports: [ReactiveFormsModule, PricePipe, CommonModule],  
+  imports: [ReactiveFormsModule, PricePipe, CommonModule, MatCardModule],  
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {

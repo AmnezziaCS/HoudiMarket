@@ -1,15 +1,27 @@
 <div class="cart-container">
     <form [formGroup]="cartForm" (ngSubmit)="onSubmit()">
-        <div formArrayName="products">
-            <ng-container *ngFor="let product of productsFormArray.controls; let i = index" [formGroupName]="i"
-                class="cart-item">
-                <p>{{ product.value.title }} - {{ product.value.price | price }}</p>
-                <button type="button" (click)="removeProduct(i)">Remove</button>
+        <div formArrayName="products" class="products-container">
+            <ng-container *ngIf="productsFormArray.controls.length > 0; else emptyCart">
+                <ng-container *ngFor="let product of productsFormArray.controls; let i = index" [formGroupName]="i"
+                    class="cart-item">
+                    <mat-card class="product-card">
+                        <img mat-card-image [src]="product.value.photo" alt="Product photo" />
+                        <mat-card-content>
+                            <p>{{ product.value.title }} - {{ product.value.price | price }}</p>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-button color="warn" (click)="removeProduct(i)">Remove</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </ng-container>
             </ng-container>
+            <ng-template #emptyCart>
+                <p>Your cart is empty.</p>
+            </ng-template>
         </div>
-        <div class="cart-total">
+        <div class="cart-total" *ngIf="productsFormArray.controls.length > 0">
             Total: {{ getTotal() | price }}
         </div>
-        <button type="submit" class="cart-submit">Submit</button>
+        <button type="submit" class="cart-submit" *ngIf="productsFormArray.controls.length > 0">Submit</button>
     </form>
 </div>
