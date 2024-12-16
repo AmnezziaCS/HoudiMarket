@@ -1,10 +1,11 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges, signal } from '@angular/core';
-import { Product } from './product.types';
-import { MatCardModule } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
-import { ProductService } from './product.service';
-import { PricePipe } from '../../pipes/price.pipe';
+import { Component, Input, OnInit, signal } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
+import { PricePipe } from '../../pipes/price.pipe';
+import { CartService } from '../cart/cart.service';
+import { ProductService } from './product.service';
+import { Product } from './product.types';
 
 @Component({
   selector: 'app-product',
@@ -19,7 +20,11 @@ export class ProductComponent implements OnInit {
   filteredProducts: Product[] = [];
   showOnStockMessage: boolean = false;
 
-  constructor(private productService: ProductService, private router: Router) { }
+  constructor(
+    private productService: ProductService,
+    private router: Router,
+    private cartService: CartService
+  ) {}
 
   ngOnInit() {
     this.productService.getAllProducts().subscribe(response => {
@@ -43,16 +48,19 @@ export class ProductComponent implements OnInit {
   toggleButtonClick(product: Product, event: Event) {
     event.stopPropagation();
     if (product.stock > 0) {
-        product.stock -= 1;
-        this.showOnStockMessage = true;
+      product.stock -= 1;
+      this.showOnStockMessage = true;
+      this.cartService.getCart().subscribe(cart => {
+        this.cartService.updateCart([...cart.products, product]).subscribe();
+      });
     } else {
-        this.showOnStockMessage = false;
+      this.showOnStockMessage = false;
     }
 
     setTimeout(() => {
-        this.showOnStockMessage = false;
+      this.showOnStockMessage = false;
     }, 2000);
-}
+  }
 
   viewProductDetails(productId: number) {
     this.router.navigate(['/product', productId]);

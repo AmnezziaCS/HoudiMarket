@@ -1,0 +1,15 @@
+<div class="cart-container">
+    <form [formGroup]="cartForm" (ngSubmit)="onSubmit()">
+        <div formArrayName="products">
+            <ng-container *ngFor="let product of productsFormArray.controls; let i = index" [formGroupName]="i"
+                class="cart-item">
+                <p>{{ product.value.title }} - {{ product.value.price | price }}</p>
+                <button type="button" (click)="removeProduct(i)">Remove</button>
+            </ng-container>
+        </div>
+        <div class="cart-total">
+            Total: {{ getTotal() | price }}
+        </div>
+        <button type="submit" class="cart-submit">Submit</button>
+    </form>
+</div>

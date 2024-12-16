@@ -1,13 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatIcon } from "@angular/material/icon";
-import { Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   imports: [MatIcon],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
   @Output() categorySelected = new EventEmitter<string>();
@@ -20,5 +19,9 @@ export class HeaderComponent {
 
   onHeaderClicked() {
     this.router.navigate(['/']);
+  }
+
+  onCartIconClicked() {
+    this.router.navigate(['/cart']);
   }
 }
