@@ -27,7 +27,6 @@ export class OrderComponent implements OnInit {
         private fb: FormBuilder,
         private cartService: CartService,
         private productService: ProductService,
-        private router: Router,
     ) {
         this.orderForm = this.fb.group({
             name: ['', Validators.required],
