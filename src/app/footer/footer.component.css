@@ -46,3 +46,18 @@
 .success {
     color: green;
 }
+
+
+.message-promo {
+    position: fixed;
+    z-index: 100;
+    top: 10px;
+    left: 40%;
+    font-size: 22px;
+    color: white;
+    background-color: green;
+    font-weight: bold;
+    border: gray solid;
+    border-radius: 4px;
+    padding: 15px;
+}

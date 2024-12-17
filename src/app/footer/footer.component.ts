@@ -16,21 +16,36 @@ export class FooterComponent implements OnInit {
 
     public errorMessage: string | null = null;
     public successMessage: string | null = null;
+    promoCode: boolean = false;
 
-    constructor() {}
+    constructor() { }
 
-    ngOnInit() {}
+    ngOnInit() { }
 
     onSubmit(form: any) {
+        const email = form.value.email;
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
         if (!form.valid) {
             this.errorMessage =
                 "Il faut une addresse email pour s'inscrire à la newsletter";
             this.successMessage = null;
             console.log('Invalid form');
-        } else {
+        } else if (!emailRegex.test(email)) {
+            this.errorMessage = "Format d'email invalide";
+            this.successMessage = null;
+            console.log('email invalide');
+        }
+        else {
             this.errorMessage = null;
             this.successMessage = 'Inscrit à la newsletter';
             console.log(`Valid form with email: ${form.value.email}`);
+            this.promoCode = true;
+
+            setTimeout(() => {
+                this.promoCode = false;
+            }, 3000);
+
         }
     }
 }
