@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-footer',
@@ -18,9 +19,9 @@ export class FooterComponent implements OnInit {
     public successMessage: string | null = null;
     promoCode: boolean = false;
 
-    constructor() { }
+    constructor(private router: Router) {}
 
-    ngOnInit() { }
+    ngOnInit() {}
 
     onSubmit(form: any) {
         const email = form.value.email;
@@ -35,8 +36,7 @@ export class FooterComponent implements OnInit {
             this.errorMessage = "Format d'email invalide";
             this.successMessage = null;
             console.log('email invalide');
-        }
-        else {
+        } else {
             this.errorMessage = null;
             this.successMessage = 'Inscrit à la newsletter';
             console.log(`Valid form with email: ${form.value.email}`);
@@ -45,7 +45,14 @@ export class FooterComponent implements OnInit {
             setTimeout(() => {
                 this.promoCode = false;
             }, 3000);
-
         }
+    }
+
+    onTermsOfServiceClicked() {
+        this.router.navigate(['/terms-of-service']);
+    }
+
+    onPrivacyPolicyClicked() {
+        this.router.navigate(['/privacy-policy']);
     }
 }
