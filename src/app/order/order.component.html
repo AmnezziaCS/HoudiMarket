@@ -1,27 +1,27 @@
 <div class="order-container">
+    <h2>Place Your Order</h2>
     <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
-        <div>
-            <label for="coordinates">Coordinates:</label>
-            <input id="coordinates" formControlName="coordinates" type="text" required>
+        <div class="form-group">
+            <label for="coordinates">Coordinates</label>
+            <input id="coordinates" formControlName="coordinates" type="text" />
         </div>
-        <div>
-            <label for="deliveryMethod">Delivery Method:</label>
-            <select id="deliveryMethod" formControlName="deliveryMethod" required>
+        <div class="form-group">
+            <label for="deliveryMethod">Delivery Method</label>
+            <select id="deliveryMethod" formControlName="deliveryMethod">
                 <option value="standard">Standard</option>
                 <option value="express">Express</option>
             </select>
         </div>
-        <div>
-            <label for="paymentMethod">Payment Method:</label>
-            <select id="paymentMethod" formControlName="paymentMethod" required>
+        <div class="form-group">
+            <label for="paymentMethod">Payment Method</label>
+            <select id="paymentMethod" formControlName="paymentMethod">
                 <option value="creditCard">Credit Card</option>
                 <option value="paypal">PayPal</option>
             </select>
         </div>
-        <button type="submit" [disabled]="loading">Submit</button>
+        <button type="submit" [disabled]="loading">Submit Order</button>
     </form>
-    <div *ngIf="orderCompleted">
-        <h2>Order Completed</h2>
-        <p>Your order has been placed successfully.</p>
+    <div *ngIf="orderCompleted" class="success-message">
+        <span class="check-mark">✔</span> Order placed successfully!
     </div>
 </div>

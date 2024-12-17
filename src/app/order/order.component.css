@@ -1,0 +1,66 @@
+.order-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.order-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.order-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.order-container form .form-group {
+    margin-bottom: 15px;
+}
+
+.order-container form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.order-container form .form-group input,
+.order-container form .form-group select {
+    width: 100%;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.order-container .success-message {
+    display: flex;
+    align-items: center;
+    color: green;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.order-container .success-message .check-mark {
+    margin-right: 10px;
+}
+
+.order-container form .form-group input:focus,
+.order-container form .form-group select:focus {
+    border-color: #007bff;
+}
+
+.order-container form button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.order-container form button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

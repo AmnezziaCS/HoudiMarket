@@ -27,11 +27,12 @@ export class OrderComponent implements OnInit {
 
   onSubmit(): void {
     if (this.orderForm.valid) {
-      this.cartService.clearCart().subscribe({
-        next: () => {
-        this.orderCompleted = true;
-        this.orderForm.reset();
-        }});
+        this.cartService.clearCart().subscribe({
+            next: () => {
+                this.orderCompleted = true;
+                this.orderForm.reset();
+            }
+        });
     }
-  }
+}
 }
