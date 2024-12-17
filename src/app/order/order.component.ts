@@ -27,10 +27,11 @@ export class OrderComponent implements OnInit {
         private router: Router,
     ) {
         this.orderForm = this.fb.group({
-            city: ['', Validators.required],
-            street: ['', Validators.required],
-            zipCode: ['', Validators.required],
-            country: ['', Validators.required],
+            name: ['', Validators.required],
+            surname: ['', Validators.required],
+            email: ['', [Validators.required, Validators.email]],
+            steamTradelink: ['', Validators.required],
+            billingAddress: ['', Validators.required],
             deliveryMethod: ['', Validators.required],
             paymentMethod: ['', Validators.required],
         });

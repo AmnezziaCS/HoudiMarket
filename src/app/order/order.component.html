@@ -1,31 +1,36 @@
 <div class="order-container">
     <h2>Place Your Order</h2>
     <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
-        <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('city')}">
-            <label for="city">City</label>
-            <input id="city" formControlName="city" type="text" />
-            <div *ngIf="isFieldInvalid('city')" class="error-message">City is required</div>
+        <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('name')}">
+            <label for="name">Name</label>
+            <input id="name" formControlName="name" type="text" />
+            <div *ngIf="isFieldInvalid('name')" class="error-message">Name is required</div>
         </div>
-        <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('street')}">
-            <label for="street">Street</label>
-            <input id="street" formControlName="street" type="text" />
-            <div *ngIf="isFieldInvalid('street')" class="error-message">Street is required</div>
+        <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('surname')}">
+            <label for="surname">Surname</label>
+            <input id="surname" formControlName="surname" type="text" />
+            <div *ngIf="isFieldInvalid('surname')" class="error-message">Surname is required</div>
         </div>
-        <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('zipCode')}">
-            <label for="zipCode">Zip Code</label>
-            <input id="zipCode" formControlName="zipCode" type="text" />
-            <div *ngIf="isFieldInvalid('zipCode')" class="error-message">Zip Code is required</div>
+        <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('email')}">
+            <label for="email">Email</label>
+            <input id="email" formControlName="email" type="email" />
+            <div *ngIf="isFieldInvalid('email')" class="error-message">Valid email is required</div>
         </div>
-        <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('country')}">
-            <label for="country">Country</label>
-            <input id="country" formControlName="country" type="text" />
-            <div *ngIf="isFieldInvalid('country')" class="error-message">Country is required</div>
+        <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('steamTradelink')}">
+            <label for="steamTradelink">Steam Tradelink</label>
+            <input id="steamTradelink" formControlName="steamTradelink" type="text" />
+            <div *ngIf="isFieldInvalid('steamTradelink')" class="error-message">Steam Tradelink is required</div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('billingAddress')}">
+            <label for="billingAddress">Billing Address</label>
+            <input id="billingAddress" formControlName="billingAddress" type="text" />
+            <div *ngIf="isFieldInvalid('billingAddress')" class="error-message">Billing Address is required</div>
         </div>
         <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('deliveryMethod')}">
             <label for="deliveryMethod">Delivery Method</label>
             <select id="deliveryMethod" formControlName="deliveryMethod">
-                <option value="standard">Standard</option>
-                <option value="express">Express</option>
+                <option value="Fast steam trade (5-10 minutes)">Fast steam trade (5-10 minutes)</option>
+                <option value="Slow steam trade (1-2 hours)">Slow steam trade (1-2 hours)</option>
             </select>
             <div *ngIf="isFieldInvalid('deliveryMethod')" class="error-message">Delivery Method is required</div>
         </div>
