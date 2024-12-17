@@ -66,3 +66,9 @@
 .cart-submit:hover {
     background-color: #45a049;
 }
+
+.loader {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #333;
+}

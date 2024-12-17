@@ -15,6 +15,7 @@ import { CartService } from './cart.service';
 export class CartComponent implements OnInit {
   cartForm: FormGroup;
   products: Product[] = [];
+  loading = false;
 
   constructor(private fb: FormBuilder, private cartService: CartService) {
     this.cartForm = this.fb.group({
@@ -44,9 +45,11 @@ export class CartComponent implements OnInit {
   }
 
   removeProduct(index: number) {
+    this.loading = true;
     const products = this.cartForm.get('products') as FormArray;
     products.removeAt(index);
     this.updateCart();
+    this.loading = false;
   }
 
   get productsFormArray(): FormArray {

@@ -10,7 +10,8 @@
                             <p>{{ product.value.title }} - {{ product.value.price | price }}</p>
                         </mat-card-content>
                         <mat-card-actions>
-                            <button mat-button color="warn" (click)="removeProduct(i)">Remove</button>
+                            <button mat-button color="warn" (click)="removeProduct(i)"
+                                [disabled]="loading">Remove</button>
                         </mat-card-actions>
                     </mat-card>
                 </ng-container>
@@ -22,6 +23,8 @@
         <div class="cart-total" *ngIf="productsFormArray.controls.length > 0">
             Total: {{ getTotal() | price }}
         </div>
-        <button type="submit" class="cart-submit" *ngIf="productsFormArray.controls.length > 0">Submit</button>
+        <button type="submit" class="cart-submit" *ngIf="productsFormArray.controls.length > 0"
+            [disabled]="loading">Submit</button>
     </form>
+    <div *ngIf="loading" class="loader">Loading...</div>
 </div>
