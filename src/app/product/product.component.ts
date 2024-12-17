@@ -18,7 +18,6 @@ export class ProductComponent implements OnInit {
   @Input() selectedCategory: string = 'all';
   products = signal<Product[]>([]);
   filteredProducts: Product[] = [];
-  // showOnStockMessage: boolean = false;
 
   constructor(
     private productService: ProductService,
@@ -49,18 +48,15 @@ export class ProductComponent implements OnInit {
     event.stopPropagation();
     if (product.stock > 0) {
       product.stock -= 1;
-      // this.showOnStockMessage = true;
       product.showOnStockMessage = true;
       this.cartService.getCart().subscribe(cart => {
         this.cartService.updateCart([...cart.products, product]).subscribe();
       });
     } else {
-      // this.showOnStockMessage = false;
       product.showOnStockMessage = false;
     }
 
     setTimeout(() => {
-      // this.showOnStockMessage = false;
       product.showOnStockMessage = false
     }, 2000);
   }

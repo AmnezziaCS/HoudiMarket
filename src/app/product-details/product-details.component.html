@@ -3,4 +3,7 @@
     <img [src]="product.photo" alt="{{ product.title }}" />
     <p>Price: {{ product.price | price }}</p>
     <p>Stock: {{ product.stock }}</p>
+    <button [ngClass]="{'onStock': product.showOnStockMessage}" (click)="toggleButtonClick(product, $event)"
+        [disabled]="product.stock === 0" mat-button color="primary">Buy</button>
+    <div *ngIf="product.showOnStockMessage" class="message-Onstock">Product has been put in cart</div>
 </div>
