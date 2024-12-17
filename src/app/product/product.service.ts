@@ -28,4 +28,11 @@ export class ProductService {
     getProductById(productId: string): Observable<Product> {
         return this.http.get<Product>(`${this.apiUrl}/products/${productId}`);
     }
+
+    updateProductStock(productId: number, stock: number): Observable<Product> {
+        return this.http.patch<Product>(
+            `${this.apiUrl}/products/${productId}`,
+            { stock },
+        );
+    }
 }

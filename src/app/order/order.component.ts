@@ -9,6 +9,8 @@ import {
 import { Router } from '@angular/router';
 
 import { CartService } from '../cart/cart.service';
+import { ProductService } from '../product/product.service';
+import { Product } from '../product/product.types';
 
 @Component({
     selector: 'app-order',
@@ -24,6 +26,7 @@ export class OrderComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private cartService: CartService,
+        private productService: ProductService,
         private router: Router,
     ) {
         this.orderForm = this.fb.group({
@@ -45,10 +48,19 @@ export class OrderComponent implements OnInit {
     onSubmit(): void {
         const country = this.orderForm.get('country')?.value;
         if (this.orderForm.valid && country?.toLowerCase() === 'france') {
-            this.cartService.clearCart().subscribe({
-                next: () => {
-                    this.orderCompleted = true;
-                    this.orderForm.reset();
+            this.cartService.getCart().subscribe({
+                next: (cart) => {
+                    cart.products.forEach((product: Product) => {
+                        this.productService
+                            .updateProductStock(product.id, product.stock - 1)
+                            .subscribe();
+                    });
+                    this.cartService.clearCart().subscribe({
+                        next: () => {
+                            this.orderCompleted = true;
+                            this.orderForm.reset();
+                        },
+                    });
                 },
             });
         } else {
