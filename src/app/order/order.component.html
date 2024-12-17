@@ -1,0 +1,27 @@
+<div class="order-container">
+    <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="coordinates">Coordinates:</label>
+            <input id="coordinates" formControlName="coordinates" type="text" required>
+        </div>
+        <div>
+            <label for="deliveryMethod">Delivery Method:</label>
+            <select id="deliveryMethod" formControlName="deliveryMethod" required>
+                <option value="standard">Standard</option>
+                <option value="express">Express</option>
+            </select>
+        </div>
+        <div>
+            <label for="paymentMethod">Payment Method:</label>
+            <select id="paymentMethod" formControlName="paymentMethod" required>
+                <option value="creditCard">Credit Card</option>
+                <option value="paypal">PayPal</option>
+            </select>
+        </div>
+        <button type="submit" [disabled]="loading">Submit</button>
+    </form>
+    <div *ngIf="orderCompleted">
+        <h2>Order Completed</h2>
+        <p>Your order has been placed successfully.</p>
+    </div>
+</div>

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '../product/product.types';
+import { Cart } from './cart.types';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,13 @@ export class CartService {
     return this.http.get<{ products: Product[] }>(`${this.apiUrl}/cart`);
   }
 
-  updateCart(products: Product[]): Observable<any> {
+  updateCart(products: Product[]): Observable<Cart> {
     return this.http.patch(`${this.apiUrl}/cart`, { products: products.map(product => {
       return {id: product.id}
-    })});
+    })}) as Observable<Cart>;
+  }
+
+  clearCart(): Observable<Cart> {
+    return this.http.patch(`${this.apiUrl}/cart`, { products: [] }) as Observable<Cart>;
   }
 }

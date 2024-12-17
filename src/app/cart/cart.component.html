@@ -23,8 +23,8 @@
         <div class="cart-total" *ngIf="productsFormArray.controls.length > 0">
             Total: {{ getTotal() | price }}
         </div>
-        <button type="submit" class="cart-submit" *ngIf="productsFormArray.controls.length > 0"
-            [disabled]="loading">Submit</button>
+        <button type="button" class="cart-confirm" *ngIf="productsFormArray.controls.length > 0" [disabled]="loading"
+            (click)="confirmOrder()">Confirm</button>
     </form>
     <div *ngIf="loading" class="loader">Loading...</div>
 </div>

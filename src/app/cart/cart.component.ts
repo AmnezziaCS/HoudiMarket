@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { PricePipe } from '../../pipes/price.pipe';
 import { Product } from '../product/product.types';
 import { CartService } from './cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -17,7 +18,7 @@ export class CartComponent implements OnInit {
   products: Product[] = [];
   loading = false;
 
-  constructor(private fb: FormBuilder, private cartService: CartService) {
+  constructor(private fb: FormBuilder, private cartService: CartService, private router: Router) {
     this.cartForm = this.fb.group({
       products: this.fb.array([])
     });
@@ -58,5 +59,9 @@ export class CartComponent implements OnInit {
 
   getTotal(): number {
     return this.cartForm.value.products.reduce((total: number, product: Product) => total + product.price, 0);
+  }
+
+  confirmOrder(): void {
+    this.router.navigate(['/order']);
   }
 }
