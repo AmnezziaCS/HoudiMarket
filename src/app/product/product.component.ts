@@ -24,7 +24,7 @@ export class ProductComponent implements OnInit {
         private productService: ProductService,
         private router: Router,
         private cartService: CartService,
-    ) {}
+    ) { }
 
     ngOnInit() {
         this.productService.getAllProducts().subscribe((response) => {

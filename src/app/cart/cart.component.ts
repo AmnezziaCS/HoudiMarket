@@ -4,7 +4,8 @@ import {
     FormArray,
     FormBuilder,
     FormGroup,
-    ReactiveFormsModule,
+    ReactiveFormsModule, FormsModule,
+    FormControl
 } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
@@ -16,7 +17,7 @@ import { CartService } from './cart.service';
 @Component({
     selector: 'app-cart',
     templateUrl: './cart.component.html',
-    imports: [ReactiveFormsModule, PricePipe, CommonModule, MatCardModule],
+    imports: [ReactiveFormsModule, PricePipe, CommonModule, MatCardModule, FormsModule],
     styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
@@ -31,6 +32,7 @@ export class CartComponent implements OnInit {
     ) {
         this.cartForm = this.fb.group({
             products: this.fb.array([]),
+            discountCode: new FormControl<string>(''),
         });
     }
 
@@ -75,8 +77,10 @@ export class CartComponent implements OnInit {
     }
 
     getTotal(): number {
+        const multiplier = this.cartForm.value.discountCode === "HOUDIX" ? 0.9 : 1;
+
         return this.cartForm.value.products.reduce(
-            (total: number, product: Product) => total + product.price,
+            (total: number, product: Product) => total + product.price * multiplier,
             0,
         );
     }

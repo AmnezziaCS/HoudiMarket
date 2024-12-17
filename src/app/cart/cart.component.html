@@ -25,6 +25,7 @@
         </div>
         <button type="button" class="cart-confirm" *ngIf="productsFormArray.controls.length > 0" [disabled]="loading"
             (click)="confirmOrder()">Confirm</button>
+        <input formControlName="discountCode" type="text" placeholder="Entrer code promo">
     </form>
     <div *ngIf="loading" class="loader">Loading...</div>
 </div>
