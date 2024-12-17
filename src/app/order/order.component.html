@@ -1,23 +1,41 @@
 <div class="order-container">
     <h2>Place Your Order</h2>
     <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="coordinates">Coordinates</label>
-            <input id="coordinates" formControlName="coordinates" type="text" />
+        <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('city')}">
+            <label for="city">City</label>
+            <input id="city" formControlName="city" type="text" />
+            <div *ngIf="isFieldInvalid('city')" class="error-message">City is required</div>
         </div>
-        <div class="form-group">
+        <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('street')}">
+            <label for="street">Street</label>
+            <input id="street" formControlName="street" type="text" />
+            <div *ngIf="isFieldInvalid('street')" class="error-message">Street is required</div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('zipCode')}">
+            <label for="zipCode">Zip Code</label>
+            <input id="zipCode" formControlName="zipCode" type="text" />
+            <div *ngIf="isFieldInvalid('zipCode')" class="error-message">Zip Code is required</div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('country')}">
+            <label for="country">Country</label>
+            <input id="country" formControlName="country" type="text" />
+            <div *ngIf="isFieldInvalid('country')" class="error-message">Country is required</div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('deliveryMethod')}">
             <label for="deliveryMethod">Delivery Method</label>
             <select id="deliveryMethod" formControlName="deliveryMethod">
                 <option value="standard">Standard</option>
                 <option value="express">Express</option>
             </select>
+            <div *ngIf="isFieldInvalid('deliveryMethod')" class="error-message">Delivery Method is required</div>
         </div>
-        <div class="form-group">
+        <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('paymentMethod')}">
             <label for="paymentMethod">Payment Method</label>
             <select id="paymentMethod" formControlName="paymentMethod">
                 <option value="creditCard">Credit Card</option>
                 <option value="paypal">PayPal</option>
             </select>
+            <div *ngIf="isFieldInvalid('paymentMethod')" class="error-message">Payment Method is required</div>
         </div>
         <button type="submit" [disabled]="loading">Submit Order</button>
     </form>
