@@ -7,4 +7,5 @@ export interface Product {
     category: string;
     createdAt: string;
     updatedAt: string;
+    showOnStockMessage: boolean;
 }
