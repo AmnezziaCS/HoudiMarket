@@ -50,7 +50,6 @@ export class ProductComponent implements OnInit {
     toggleButtonClick(product: Product, event: Event) {
         event.stopPropagation();
         if (product.stock > 0) {
-            product.stock -= 1;
             product.showOnStockMessage = true;
             this.cartService.getCart().subscribe((cart) => {
                 this.cartService

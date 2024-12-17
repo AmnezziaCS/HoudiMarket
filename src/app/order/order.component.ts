@@ -6,7 +6,6 @@ import {
     ReactiveFormsModule,
     Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
 
 import { CartService } from '../cart/cart.service';
 import { ProductService } from '../product/product.service';
@@ -49,11 +48,24 @@ export class OrderComponent implements OnInit {
         if (this.orderForm.valid && country?.toLowerCase() === 'france') {
             this.cartService.getCart().subscribe({
                 next: (cart) => {
-                    cart.products.forEach((product: Product) => {
+                    const productIds = Array.from(
+                        new Set(cart.products.map((product) => product.id)),
+                    );
+
+                    productIds.forEach((productId) => {
                         this.productService
-                            .updateProductStock(product.id, product.stock - 1)
+                            .updateProductStock(
+                                productId,
+                                cart.products.filter(
+                                    (product) => product.id === productId,
+                                )[0].stock -
+                                    cart.products.filter(
+                                        (product) => product.id === productId,
+                                    ).length,
+                            )
                             .subscribe();
                     });
+
                     this.cartService.clearCart().subscribe({
                         next: () => {
                             this.orderCompleted = true;
