@@ -31,7 +31,10 @@ export class OrderComponent implements OnInit {
             surname: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
             steamTradelink: ['', Validators.required],
-            billingAddress: ['', Validators.required],
+            street: ['', Validators.required],
+            city: ['', Validators.required],
+            postalCode: ['', Validators.required],
+            country: ['', Validators.required],
             deliveryMethod: ['', Validators.required],
             paymentMethod: ['', Validators.required],
         });
@@ -40,7 +43,8 @@ export class OrderComponent implements OnInit {
     ngOnInit(): void {}
 
     onSubmit(): void {
-        if (this.orderForm.valid) {
+        const country = this.orderForm.get('country')?.value;
+        if (this.orderForm.valid && country?.toLowerCase() === 'france') {
             this.cartService.clearCart().subscribe({
                 next: () => {
                     this.orderCompleted = true;
@@ -49,6 +53,9 @@ export class OrderComponent implements OnInit {
             });
         } else {
             this.markAllFieldsAsTouched();
+            if (country && country?.toLowerCase() !== 'france') {
+                alert('Orders are only allowed for France.');
+            }
         }
     }
 
@@ -62,7 +69,22 @@ export class OrderComponent implements OnInit {
     private markAllFieldsAsTouched(): void {
         Object.keys(this.orderForm.controls).forEach((field) => {
             const control = this.orderForm.get(field);
-            control?.markAsTouched({ onlySelf: true });
+            if (control instanceof FormGroup) {
+                this.markAllFieldsAsTouchedRecursive(control);
+            } else {
+                control?.markAsTouched({ onlySelf: true });
+            }
+        });
+    }
+
+    private markAllFieldsAsTouchedRecursive(formGroup: FormGroup): void {
+        Object.keys(formGroup.controls).forEach((field) => {
+            const control = formGroup.get(field);
+            if (control instanceof FormGroup) {
+                this.markAllFieldsAsTouchedRecursive(control);
+            } else {
+                control?.markAsTouched({ onlySelf: true });
+            }
         });
     }
 }

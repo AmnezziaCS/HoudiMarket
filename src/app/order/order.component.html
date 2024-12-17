@@ -1,6 +1,7 @@
 <div class="order-container">
     <h2>Place Your Order</h2>
     <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+        <h3>Your Details</h3>
         <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('name')}">
             <label for="name">Name</label>
             <input id="name" formControlName="name" type="text" />
@@ -21,11 +22,29 @@
             <input id="steamTradelink" formControlName="steamTradelink" type="text" />
             <div *ngIf="isFieldInvalid('steamTradelink')" class="error-message">Steam Tradelink is required</div>
         </div>
-        <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('billingAddress')}">
-            <label for="billingAddress">Billing Address</label>
-            <input id="billingAddress" formControlName="billingAddress" type="text" />
-            <div *ngIf="isFieldInvalid('billingAddress')" class="error-message">Billing Address is required</div>
+        <h3>Billing Address</h3>
+        <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('street')}">
+            <label for="street">Street</label>
+            <input id="street" formControlName="street" type="text" />
+            <div *ngIf="isFieldInvalid('street')" class="error-message">Street is required</div>
         </div>
+        <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('city')}">
+            <label for="city">City</label>
+            <input id="city" formControlName="city" type="text" />
+            <div *ngIf="isFieldInvalid('city')" class="error-message">City is required</div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('postalCode')}">
+            <label for="postalCode">Postal Code</label>
+            <input id="postalCode" formControlName="postalCode" type="text" />
+            <div *ngIf="isFieldInvalid('postalCode')" class="error-message">Postal Code is required
+            </div>
+        </div>
+        <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('country')}">
+            <label for="country">Country</label>
+            <input id="country" formControlName="country" type="text" />
+            <div *ngIf="isFieldInvalid('country')" class="error-message">Country is required</div>
+        </div>
+        <h3>Order Details</h3>
         <div class="form-group" [ngClass]="{'has-error': isFieldInvalid('deliveryMethod')}">
             <label for="deliveryMethod">Delivery Method</label>
             <select id="deliveryMethod" formControlName="deliveryMethod">
